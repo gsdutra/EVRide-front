@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import {useState, useEffect} from 'react'
+import {useTheme} from 'next-themes'
+import ThemeSwitch from '../components/ThemeSwitch'
 
 export default function Home() {
   return (
