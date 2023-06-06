@@ -1,6 +1,5 @@
 import ThemeSwitch from "./ThemeSwitch"
 import Link from 'next/link';
-import 'animate.css';
 
 export default function Menu(props: any){
 	return (<>

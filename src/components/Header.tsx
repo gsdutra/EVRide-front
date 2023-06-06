@@ -3,8 +3,10 @@ import {useState} from 'react'
 import Menu from './Menu'
 import UserMenu from './UserMenu'
 import {useTheme} from 'next-themes'
+import { useRouter } from 'next/router';
 
 export default function Header(){
+	const router = useRouter();
 
 	const [showMenu, setShowMenu] = useState(false);
 	const [showUser, setShowUser] = useState(false);
@@ -16,7 +18,8 @@ export default function Header(){
 			<Image src={`/menu_${logoColor}.svg`} width={100} height={1} alt="logo" className="button"
 			onClick={()=>(setShowMenu(!showMenu))}/>
 
-			<img src={`/logo_${logoColor}_mode.png`} alt="logo"/>
+			<img src={`/logo_${logoColor}_mode.png`} alt="logo"
+			className="button" onClick={()=>router.push('/')}/>
 
 			<Image src={`/user_${logoColor}.svg`} width={100} height={1} alt="logo" className="button"
 			onClick={()=>(setShowUser(!showUser))}/>

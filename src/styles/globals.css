@@ -30,3 +30,29 @@
 	font-weight: 500;
 	font-size: 18px;
 }
+
+input, select {
+	display: block;
+	height: 50px;
+	width: 90%;
+	border: none;
+	border-radius: 2px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+input:hover,
+input:focus,
+input:active:focus {
+color: #0DDDFF;
+outline: none;
+border-bottom: 1px solid #0DDDFF;
+}
+
+input:hover::placeholder,
+input:focus::placeholder,
+input:active:focus::placeholder {
+position: relative;
+-webkit-transform: translateY(-2px);
+transform: translateY(-2px);
+}
