@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import {useState, useEffect} from 'react'
 import {useTheme} from 'next-themes'
-import ThemeSwitch from '../components/ThemeSwitch'
 
 export default function Home() {
   let logoColor = 'light';
@@ -15,8 +14,17 @@ export default function Home() {
             height={100}
             alt="logo"
           />
-          <a className="mt-5">O seu marketplace de veículos sustentáveis</a>
-          <ThemeSwitch/>
+          <a className="mt-5 text-xl">O seu marketplace de veículos sustentáveis</a>
+
+          <div className="mt-[30px]"/>
+
+          <button className="button bt bg-blue w-[341px]">
+            <a>PROCURAR VEÍCULOS</a>
+          </button>
+
+          <button className="button bt bg-gray w-[341px]">
+            <a>ANUNCIE SEU VEÍCULO</a>
+          </button>
     </div>
   )
 }

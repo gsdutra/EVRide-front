@@ -2,11 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+/* html *{
+	font-family: 'Roboto', sans-serif;
+} */
+
 .button {
 	transition: .2s;
 	cursor: pointer;
 }
 .button:hover {
 	transition: .2s;
-	transform: scale(1.07);
+	transform: scale(1.02);
+}
+
+.bt {
+	border-radius: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 18px;
+	height: auto;
+	font-size: 18px;
+	color: #121212;
+	margin: 7px;
+	font-weight: 500;
+	font-size: 18px;
 }
