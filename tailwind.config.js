@@ -6,14 +6,16 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        'light': '#EDEDED',
+        'light': '#FFFFFF',
         'dark': '#070709'
       },
       colors: {
         'seclight': '#D9D9D9',
         'secdark': '#1A1A1A',
         'txtlight': '#121212',
-        'txtdark': '#EDEDED'
+        'txtdark': '#EDEDED',
+        'blue': '#0DDDFF',
+        'gray': '#D9D9D9'
       },
     },
   },
