@@ -3,6 +3,7 @@ import useApi from '../hooks/useApi';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
+import Link from 'next/link'
 
 export default function Signup() {
 	const router = useRouter();
@@ -83,7 +84,10 @@ export default function Signup() {
 			<button className="button bt bg-blue w-[341px]" type="submit">REGISTRAR</button>
 		</form>
 
-		<button className="button bt bg-gray w-[341px]" >Já tem conta? Faça login</button>
+		<Link href='/signin'>
+			<button className="button bt bg-gray w-[341px]" >Já tem conta? Faça login</button>
+		</Link>
+
 
 	</div>)
 }

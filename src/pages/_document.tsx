@@ -7,6 +7,8 @@ export default function Document() {
       <body className='
         bg-light dark:bg-dark
         text-txtlight dark:text-txtdark
+        overflow-x-hidden h-screen
+        overflow-y-hidden
         '>
         <Main />
         <NextScript />

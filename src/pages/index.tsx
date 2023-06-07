@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import {useState, useEffect} from 'react'
 import {useTheme} from 'next-themes'
+import Link from 'next/link'
 
 export default function Home() {
   let logoColor = 'light';
@@ -18,13 +19,17 @@ export default function Home() {
 
           <div className="mt-[30px]"/>
 
-          <button className="button bt bg-blue w-[341px]">
-            <a>PROCURAR VEÍCULOS</a>
-          </button>
+          <Link href='veiculos'>
+            <button className="button bt bg-blue w-[341px]">
+              PROCURAR VEÍCULOS
+            </button>
+          </Link>
 
-          <button className="button bt bg-gray w-[341px]">
-            <a>ANUNCIE SEU VEÍCULO</a>
-          </button>
+          <Link href='/anunciar'>
+            <button className="button bt bg-gray w-[341px]">
+              ANUNCIE SEU VEÍCULO
+            </button>
+          </Link>
     </div>
   )
 }
