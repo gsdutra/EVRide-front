@@ -12,9 +12,9 @@ export default function Header(){
 	const [showUser, setShowUser] = useState(false);
 
 	let logoColor = 'light';
-	if (useTheme().theme === 'dark') logoColor = 'dark';
-	return(<>
-		<div className="h-20 flex justify-between p-3 bg-seclight dark:bg-secdark">
+	if (useTheme().theme === 'dark' || 'system') logoColor = 'dark';
+	return(<div className='overflow-y-hidden h-screen overflow-x-hidden'>
+		<div className="h-20 flex justify-between p-3 bg-seclight dark:bg-secdark z-50">
 			<Image src={`/menu_${logoColor}.svg`} width={100} height={1} alt="logo" className="button"
 			onClick={()=>(setShowMenu(!showMenu))}/>
 
@@ -26,5 +26,5 @@ export default function Header(){
 		</div>
 		<Menu show={showMenu} hide={setShowMenu}/>
 		<UserMenu show={showUser} hide={setShowUser}/>
-	</>)
+	</div>)
 }
