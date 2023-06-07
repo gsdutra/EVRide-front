@@ -12,7 +12,11 @@ export default function Header(){
 	const [showUser, setShowUser] = useState(false);
 
 	let logoColor = 'light';
-	if (useTheme().theme === 'dark' || 'system') logoColor = 'dark';
+	if (useTheme().theme === 'dark') logoColor = 'dark';
+	if (useTheme().theme === 'system') {
+		if (useTheme().systemTheme === 'dark') logoColor = 'dark';
+	}
+
 	return(<div>
 		<div className="h-20 flex justify-between p-3 bg-seclight dark:bg-secdark z-50">
 			<Image src={`/menu_${logoColor}.svg`} width={100} height={1} alt="logo" className="button"
