@@ -25,7 +25,7 @@ export default function Home() {
 
       <div className="mt-[30px]" />
 
-      <Link href='veiculos'>
+      <Link href='/anuncios'>
         <button className="button bt bg-blue w-[341px]">
           PROCURAR VEÍCULOS
         </button>
