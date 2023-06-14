@@ -1,6 +1,7 @@
 import { useEffect, useState, ChangeEvent, use } from 'react';
 import useApi from '@/hooks/useApi';
 import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
 import UserNotLogged from '@/components/UserNotLogged';
 import axios from 'axios';
@@ -22,7 +23,7 @@ export default function Anunciar() {
 	const [vehiclePrice, setVehiclePrice] = useState<number | undefined>(undefined);
 	const [vehicleMileage, setVehicleMileage] = useState<number | undefined>(undefined);
 	const [plateEnding, setPlateEnding] = useState<number>();
-	const [acceptsTrade, setAcceptsTrade] = useState<number>(1);
+	const [acceptsTrade, setAcceptsTrade] = useState<number>();
 	const [fuelType, setFuelType] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
 
@@ -76,8 +77,10 @@ export default function Anunciar() {
 		const token = localStorage.getItem("token") || "";
 		e.preventDefault();
 
-		let brandId: number = brandList.find((brand) => brand.name === vehicleBrand);
-		let modelId: number = modelList.find((model) => model.name === vehicleModel);
+		let brandId = brandList.find((brand) => brand.name === vehicleBrand);
+		let modelId = modelList.find((model) => model.name === vehicleModel);
+		if (brandId) brandId = brandId.id;
+		if (modelId) modelId = modelId.id;
 
 		try {
 			if (brandId === undefined) {
@@ -95,17 +98,32 @@ export default function Anunciar() {
 		}
 
 		const data: object = {
+			category: vehicleCategory,
 			brandId: brandId,
 			modelId: modelId,
-			year: vehicleYear,
-			price: vehiclePrice,
-			mileage: vehicleMileage,
-			plateEnding: plateEnding,
+			year: Number(vehicleYear),
+			price: Number(vehiclePrice),
+			mileage: Number(vehicleMileage),
+			plateEnding: Number(plateEnding),
 			acceptsTrade: Boolean(acceptsTrade),
 			fuel: fuelType,
 			description: description,
-			image: image
+			imagesArray: [image],
+			state: state,
+			city: city
 		}
+
+		const createListing = await useApi.post('/listing', data, token)
+			.then((e) => {
+				toast.success('Anúncio criado com sucesso!');
+				setTimeout(() => {
+					window.location.href = '/anuncios';
+				}, 2000);
+			})
+			.catch((e) => {
+				toast.error('Erro ao criar anúncio!')
+				console.log(e)
+			})
 
 	}
 
@@ -113,6 +131,7 @@ export default function Anunciar() {
 	}
 
 	return (<>
+		<ToastContainer/>
 		{userLogged?
 		<div className="mt-[50px] flex flex-col justify-center items-center text-xl">
 			<p>Anunciar veículo</p>
