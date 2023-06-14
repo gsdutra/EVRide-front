@@ -3,6 +3,7 @@ import useApi from '@/hooks/useApi';
 import { toast, ToastContainer } from "react-toastify";
 import Link from 'next/link';
 import UserNotLogged from '@/components/UserNotLogged';
+import axios from 'axios';
 
 export default function Anunciar() {
 	const [userLogged, setUserLogged] = useState(false);
@@ -10,8 +11,11 @@ export default function Anunciar() {
 	const [vehicleModel, setVehicleModel] = useState<string>('');
 	const [vehicleBrand, setVehicleBrand] = useState<string>('');
 
-	const [modelList, setModelList] = useState<any[]>([]);
+	const [stateList, setStateList] = useState<string[]>([]);
+	const [cityList, setCityList] = useState<string[]>([]);
+
 	const [brandList, setBrandList] = useState<any[]>([]);
+	const [modelList, setModelList] = useState<any[]>([]);
 
 	const [vehicleCategory, setVehicleCategory] = useState<string>('');
 	const [vehicleYear, setVehicleYear] = useState<number | undefined>(undefined);
@@ -22,16 +26,28 @@ export default function Anunciar() {
 	const [fuelType, setFuelType] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
 
+	const [state, setState] = useState<string>('');
+	const [city, setCity] = useState<string>('');
+
 	const [image, setImage] = useState<string>('');
 
 	useEffect(() => {
 		const token = localStorage.getItem("token") || "";
-		const prom = useApi.get('/user', token)
+		const checkUser = useApi.get('/user', token)
 		.then((e) => setUserLogged(true))
 		.catch((e) => setUserLogged(false))
 
-		const prom2 = useApi.get('/listing/brands')
+		const getBrands = useApi.get('/listing/brands')
 		.then((e) => setBrandList(e.data))
+		.catch((e) => console.log(e))
+
+		let statesArray: string[] = [];
+		const getStates = axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+		.then((e) => {
+			e.data.map((state: any) => statesArray.push(state.sigla))
+			statesArray.sort();
+			setStateList(statesArray);
+		})
 		.catch((e) => console.log(e))
 	}, [])
 
@@ -44,6 +60,17 @@ export default function Anunciar() {
 				.catch((e) => console.log(e))
 		}
 	}, [vehicleBrand])
+
+	useEffect(() => {
+		let cityArray: string[] = [];
+		const getCities = axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios`)
+			.then((e) => {
+				e.data.map((city: any) => cityArray.push(city.nome))
+				cityArray.sort();
+				setCityList(cityArray);
+			})
+			.catch((e) => console.log(e))
+	}, [state])
 
 	const handleSubmit = async (e: any) => {
 		const token = localStorage.getItem("token") || "";
@@ -210,6 +237,25 @@ export default function Anunciar() {
 				value={image}
 				onChange={e => setImage(e.target.value)}
 			/>
+
+			<a>Onde o veículo está localizado?</a>
+			<select value={state} onChange={e => setState(e.target.value)}
+				required
+				className="mb-3">
+				<option value="null">Selecione o estado</option>
+				{stateList.map((state, i) => (
+					<option value={state} key={i}>{state}</option>
+				))}
+			</select>
+			<select value={city} onChange={e => setCity(e.target.value)}
+				required
+				disabled={state === 'null'}
+				className="mb-3">
+				<option value="null">Selecione a cidade</option>
+				{cityList.map((city, i) => (
+					<option value={city} key={i}>{city}</option>
+				))}
+			</select>
 			
 			<button className="button bt bg-blue mt-2 w-[341px]" type="submit">ENVIAR ANÚNCIO</button>
 		</form>
