@@ -24,6 +24,7 @@ export default function Anuncios() {
 		{listings.map((listing: any, i: number) => (
 				<ListingContainer
 					key={i}
+					id={listing.id}
 					images={listing.images}
 					brand={listing.brand.name}
 					model={listing.model.name}
