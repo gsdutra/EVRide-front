@@ -71,7 +71,7 @@ export default function Anuncio(props: any) {
 								</span>
 								<p className=" mt-4 mb-2">DESCRIÇÃO:</p>
 								<span className="text-slate-700 dark:text-slate-400">
-								<p className="text-base">{listing.description}</p>
+								<p className="text-base mb-12">{listing.description}</p>
 								</span>
 							</div>
 					</div>
