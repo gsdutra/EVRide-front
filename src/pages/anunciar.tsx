@@ -181,7 +181,11 @@ export default function Anunciar() {
 				type="number"
 				id="year"
 				value={vehicleYear}
-				onChange={e => setVehicleYear(e.target.value as unknown as number)}
+				onChange={e => 
+					!e.target.value?
+					setVehicleYear(undefined):
+					setVehicleYear(Math.abs(Math.round(e.target.value as unknown as number)))
+				}
 			/>
 			<input
 				required
@@ -190,7 +194,11 @@ export default function Anunciar() {
 				type="number"
 				id="price"
 				value={vehiclePrice}
-				onChange={e=>setVehiclePrice(e.target.value as unknown as number)}
+				onChange={e => 
+					!e.target.value?
+					setVehiclePrice(undefined):
+					setVehiclePrice(Math.abs(Math.round(e.target.value as unknown as number)))
+				}
 			/>
 			{!vehiclePrice? <></> :
 			<div className="input-bar">
@@ -209,7 +217,11 @@ export default function Anunciar() {
 				type="number"
 				id="mileage"
 				value={vehicleMileage}
-				onChange={e => setVehicleMileage(e.target.value as unknown as number)}
+				onChange={e => 
+					!e.target.value?
+					setVehicleMileage(undefined):
+					setVehicleMileage(Math.abs(Math.round(e.target.value as unknown as number)))
+				}
 			/>
 			{!vehicleMileage? <></> :
 			<div className="input-bar">
