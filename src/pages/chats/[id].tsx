@@ -1,12 +1,13 @@
 import useApi from '@/hooks/useApi';
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import UserNotLogged from '@/components/UserNotLogged';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Chat() {
 	const router = useRouter()
+	const bottomRef = useRef<HTMLDivElement>(null);
 
 	const [userLogged, setUserLogged] = useState(true);
 	const [update, setUpdate] = useState(false);
@@ -19,6 +20,7 @@ export default function Chat() {
 	const [as, setAs] = useState<string>('buyer');
 	const [userId, setUserId] = useState<number>(0);
 	const [inputMessage, setInputMessage] = useState<string>('');
+	const [chatLength, setChatLength] = useState<number>(0);
 
 	const id = router.query.id;
 
@@ -46,6 +48,14 @@ export default function Chat() {
 			})
 			.catch((e) => console.log(e))
 	}, [userLogged, update, id]);
+
+	useEffect(() => {
+		const bottomElement = bottomRef.current;
+		if (bottomElement && chatLength < chatData.messages.length) {
+			setChatLength(chatData.messages.length);
+			setTimeout(() => { bottomElement.scrollIntoView({ behavior: 'smooth' }) }, 100);
+		}
+	}, [chatLength, chatData.messages]);
 
 	const handleSendMessage = () => {
 		const token = localStorage.getItem("token") || "";
@@ -100,6 +110,7 @@ export default function Chat() {
 							</>
 						)
 					})}
+					<div ref={bottomRef}></div>
 				</div>
 
 				<div className='flex fixed bottom-4 z-20'>
