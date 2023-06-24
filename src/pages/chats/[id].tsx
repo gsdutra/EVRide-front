@@ -93,7 +93,7 @@ export default function Chat() {
 					}
 				</div>
 
-				<div className='max-w-[600px] w-full flex flex-col mt-[120px] mb-[125px]'>
+				<div className='max-w-[600px] w-full flex flex-col mt-28 h-[64vh] overflow-y-scroll'>
 					{chatData.messages.map((message: any, i: number) => {
 						return (
 							<>
@@ -119,8 +119,8 @@ export default function Chat() {
 
 				</div>
 
-				<div className="fixed w-full h-[120px] bg-light dark:bg-dark top-20"></div>
-				<div className="fixed w-full h-[125px] bg-light dark:bg-dark bottom-0"></div>
+				{/* <div className="fixed z-10 w-full h-[120px] bg-light dark:bg-dark top-20"></div> */}
+				{/* <div className="fixed z-10 w-full h-[125px] bg-light dark:bg-dark bottom-0"></div> */}
 
 			</div>
 			:
