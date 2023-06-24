@@ -103,7 +103,7 @@ export default function Anunciar() {
 			modelId: modelId,
 			year: Number(vehicleYear),
 			price: Number(vehiclePrice),
-			mileage: Number(vehicleMileage),
+			mileage: isNaN(Number(vehicleMileage))? 0 : Number(vehicleMileage),
 			plateEnding: Number(plateEnding),
 			acceptsTrade: Boolean(acceptsTrade),
 			fuel: fuelType,
@@ -112,6 +112,8 @@ export default function Anunciar() {
 			state: state,
 			city: city
 		}
+
+		console.log(data)
 
 		const createListing = await useApi.post('/listing', data, token)
 			.then((e) => {

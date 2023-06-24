@@ -26,7 +26,7 @@ export default function Chat() {
 
 	setInterval(() => {
 		setUpdate(!update)
-	}, 500)
+	}, 2000)
 
 	useEffect(() => {
 		const token = localStorage.getItem("token") || "";
@@ -114,7 +114,16 @@ export default function Chat() {
 				</div>
 
 				<div className='flex fixed bottom-4 z-20'>
-					<input type="text" placeholder="Digite uma mensagem" className="bg-seclight dark:bg-secdark max-w-[600px] h-24 w-full flex items-center pl-4 pr-4 rounded-l-full mb-2" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} />
+					<input type="text"
+					placeholder="Digite uma mensagem"
+					className="bg-seclight dark:bg-secdark max-w-[600px] h-24 w-full flex items-center pl-4 pr-4 rounded-l-full mb-2"
+					value={inputMessage}
+					onChange={(e) => setInputMessage(e.target.value)}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') {
+							handleSendMessage()
+						}
+					}} />
 					<button className="text-black button bg-blue h-24 w-32 flex items-center justify-center rounded-r-full" onClick={handleSendMessage}>Enviar</button>
 
 				</div>

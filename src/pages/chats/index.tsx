@@ -33,7 +33,7 @@ export default function Chats() {
 				<h1 className='w-max text-center font-bold mb-10'>Seus chats</h1>
 				{chats.map((chat, i) => {
 					return (<>
-						<Link href={'/chats/'+chat.id} className="flex">
+						<Link href={'/chats/'+chat.id} className="flex max-w-[25rem] w-full justify-start">
 							<img src={chat.userImage} className="h-20 w-auto img-cover rounded-full mr-7" />
 							<div>
 								<a className="text-sm">{chat.userName}</a> <br />
@@ -41,7 +41,7 @@ export default function Chats() {
 							</div>
 						</Link>
 						{i === chats.length - 1 ? null :
-							<div className="w-[60vw] h-[1px] mt-3 mb-3 bg-slate-600 opacity-50" />
+							<div className="relative z-0 w-[60vw] h-[1px] mt-3 mb-3 bg-slate-600 opacity-50 z-10" />
 						}
 
 					</>)

@@ -15,7 +15,6 @@ export default function Anuncio(props: any) {
 	const [mileage, setMileage] = useState<string>('');
 
 	const id = router.query.id;
-	console.log(listing)
 
 	useEffect(() => {
 
@@ -34,8 +33,6 @@ export default function Anuncio(props: any) {
 		setMileage(listing.mileage.toLocaleString().replace(/,/g, '.'));
 	}, [listing])
 
-	console.log(listing)
-
 	const startChat = () => {
 		const token = localStorage.getItem("token") || "";
 		const checkUser = useApi.get('/user', token)
@@ -44,7 +41,7 @@ export default function Anuncio(props: any) {
 				const sellerId = listing.sellerId;
 				useApi.post('/chat', {listingId, sellerId}, token)
 					.then((e) => {
-						router.push('/chat/' + e.data.id)
+						router.push('/chats/' + e.data.chatId)
 					})
 					.catch((e) => toast.error("Erro ao iniciar conversa."))
 			})

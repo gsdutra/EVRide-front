@@ -21,7 +21,7 @@ export default function Header() {
 		}
 	}, [theme.theme, theme.systemTheme])
 
-	return (<div className="fixed w-full top-0">
+	return (<div className="fixed w-full top-0 z-50">
 		<div className="h-20 flex justify-between p-3 bg-seclight dark:bg-secdark z-50">
 			<Image src={`/menu_${logoColor}.svg`} width={100} height={1} alt="logo" className="button"
 				onClick={() => (setShowMenu(!showMenu))} />
